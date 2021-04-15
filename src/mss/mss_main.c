@@ -641,6 +641,7 @@ void MmwDemo_uartTxTask(UArg arg0, UArg arg1)
             packetLen += objOut->header.length;
             tlvIdx++;
         }
+#if 0
         if (numTargets > 0) 
         {
             targetListLength = sizeof(Pcount3DDemo_output_message_tl) + numTargets*sizeof(trackerProc_Target);
@@ -659,6 +660,7 @@ void MmwDemo_uartTxTask(UArg arg0, UArg arg1)
             packetLen += presenceIndLength;
             tlvIdx++;
         }
+#endif
 
         header.numTLVs = tlvIdx;
         header.totalPacketLen   =   packetLen;
@@ -685,6 +687,7 @@ void MmwDemo_uartTxTask(UArg arg0, UArg arg1)
                                objOut->header.length);
         }
         Task_sleep(1);
+#if 0
         /*Send Tracker information*/
         if (numTargets > 0) 
         {
@@ -712,7 +715,7 @@ void MmwDemo_uartTxTask(UArg arg0, UArg arg1)
             UART_write(uartHandle, (uint8_t*)&tl, sizeof(Pcount3DDemo_output_message_tl));
             UART_write(uartHandle, (uint8_t*)&(gMmwMssMCB.presenceInd), sizeof(uint32_t));
         }
-	
+#endif
         gMmwMssMCB.uartProcessingTimeInUsec	=	(Cycleprofiler_getTimeStamp() - startTime)/R4F_CLOCK_MHZ;
     }
 }
